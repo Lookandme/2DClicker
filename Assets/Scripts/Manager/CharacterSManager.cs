@@ -15,11 +15,13 @@ public class CharacterStatManager : MonoBehaviour
 
         }
         else Destroy(gameObject);
+        currentStat = baseStat;
+     
     }
     // Start is called before the first frame update
     void Start()
     {
-        currentStat = baseStat;
+        
     }
 
     // Update is called once per frame
