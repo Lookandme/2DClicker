@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterManager : MonoBehaviour
+public class CharacterStatManager : MonoBehaviour
 {
-    public static CharacterManager instance; // 매니저 스크립트 싱글톤
+    public static CharacterStatManager instance; // 매니저 스크립트 싱글톤
     [SerializeField] private Player baseStat; // Player 스크립트에서 정보 받아오기 , 초기 정보
     public Player currentStat {  get; private set; } // 현재 정보
     private void Awake()
@@ -19,7 +19,7 @@ public class CharacterManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        currentStat = baseStat;
     }
 
     // Update is called once per frame
@@ -27,4 +27,6 @@ public class CharacterManager : MonoBehaviour
     {
        
     }
+
+
 }
