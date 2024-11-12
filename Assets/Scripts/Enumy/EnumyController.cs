@@ -1,59 +1,37 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class PlayerController : MonoBehaviour
+public class EnumyController : MonoBehaviour
 {
-    [SerializeField] private Button hitButton;
     private Rigidbody2D rb;
     private Animator animator;
-    public Action hit;
     public float moveSpeed;
     private float attackRange = 1f;
     private float attackRate;
     private float lastAttackTime;
     public bool isAttacking = false;
     public LayerMask targetMask;
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
 
+    // Update is called once per frame
+    void Update()
+    {
+        EnumyMove();
+    }
 
-    private void Awake()
-    {
-        hitButton.onClick.AddListener(OnClick);
-        animator = GetComponentInChildren<Animator>();
-        rb = GetComponent<Rigidbody2D>();
-        
-    }
-    private void Start()
-    {
-        moveSpeed = CharacterStatManager.instance.currentStat.maxSpeed;
-        attackRate = CharacterStatManager.instance.currentStat.attackSpeed;
-        
-    }
-    private void FixedUpdate()
-    {
-        CharacterMove();
-    }
-    private void OnClick()
-    {
-        if(!isAttacking) return;
-        else
-        {
-            animator.SetTrigger("Attack");
-            hit?.Invoke();
-        }
-        
-        
-    }
-    private void CharacterMove()
+    private void EnumyMove()
     {
         RaycastHit2D hit2 = Physics2D.Raycast(transform.position, transform.right, attackRange, targetMask);
         if (hit2.collider == null)
         {
             animator.SetBool("Walk", true);
             isAttacking = false;
-            transform.position += Vector3.right * moveSpeed * Time.deltaTime;
+            transform.position += Vector3.left * moveSpeed * Time.deltaTime;
 
         }
         else
@@ -62,7 +40,6 @@ public class PlayerController : MonoBehaviour
             isAttacking = true;
             if (isAttacking && Time.time - lastAttackTime < attackRate)
             {
-                lastAttackTime = Time.time;
                 animator.SetBool("Attack", true);
                 // hit2.collider.GetComponent<IDamagable>().GetDamage(damage); // 몬스터 타격 주는 매서드 인터페이스로 구현 필요
             }

@@ -825,7 +825,7 @@ GameObject:
   - component: {fileID: 654247039461037681}
   - component: {fileID: 6743798656480824563}
   - component: {fileID: 3698981727558094920}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -893,7 +893,7 @@ GameObject:
   - component: {fileID: 7043216221779081551}
   - component: {fileID: 8963759285830573727}
   - component: {fileID: 8963759285830573726}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -1027,6 +1027,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitButton: {fileID: 1868299906}
   moveSpeed: 0
+  isAttacking: 0
+  targetMask:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!114 &8963759285830573727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1042,9 +1046,9 @@ MonoBehaviour:
   baseStat:
     statsChangeType: 0
     maxHealth: 0
-    maxSpeed: 1
+    maxSpeed: 0.1
     damage: 0
-    attackSpeed: 0
+    attackSpeed: 2
     Criticalpercent: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
