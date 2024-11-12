@@ -29,9 +29,9 @@ public class EnumyController : MonoBehaviour
         RaycastHit2D hit2 = Physics2D.Raycast(transform.position, transform.right, attackRange, targetMask);
         if (hit2.collider == null)
         {
-            animator.SetBool("Walk", true);
+            //animator.SetBool("Walk", true);
             isAttacking = false;
-            transform.position += Vector3.left * moveSpeed * Time.deltaTime;
+            transform.position += Vector3.left * 0.1f * Time.deltaTime;
 
         }
         else
