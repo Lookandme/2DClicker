@@ -12,13 +12,11 @@ public class EnumyController : MonoBehaviour
     private float lastAttackTime;
     public bool isAttacking = false;
     public LayerMask targetMask;
-    // Start is called before the first frame update
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         EnumyMove();
@@ -26,17 +24,19 @@ public class EnumyController : MonoBehaviour
 
     private void EnumyMove()
     {
-        RaycastHit2D hit2 = Physics2D.Raycast(transform.position, transform.right, attackRange, targetMask);
+        RaycastHit2D hit2 = Physics2D.Raycast(transform.position,transform.right * -1, attackRange, targetMask);
+        Debug.DrawRay(transform.position, transform.right * -1 * attackRange, Color.red);
         if (hit2.collider == null)
         {
             //animator.SetBool("Walk", true);
             isAttacking = false;
-            transform.position += Vector3.left * 0.1f * Time.deltaTime;
+            transform.position += Vector3.left * moveSpeed * Time.deltaTime;
 
         }
         else
         {
             animator.SetBool("Walk", false);
+
             isAttacking = true;
             if (isAttacking && Time.time - lastAttackTime < attackRate)
             {

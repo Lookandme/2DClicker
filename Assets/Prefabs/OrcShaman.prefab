@@ -245,7 +245,6 @@ GameObject:
   - component: {fileID: 3817988532741504590}
   - component: {fileID: 1496261899463073243}
   - component: {fileID: 4580068226730991299}
-  - component: {fileID: 6140774302589869306}
   - component: {fileID: 3303066431795770406}
   m_Layer: 7
   m_Name: OrcShaman
@@ -302,7 +301,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.25}
+  m_Offset: {x: -0.092098236, y: -0.25}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -313,7 +312,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.6, y: 1}
+  m_Size: {x: 0.71125984, y: 1}
   m_EdgeRadius: 0
 --- !u!50 &1496261899463073243
 Rigidbody2D:
@@ -363,41 +362,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!58 &6140774302589869306
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7543099777107370006}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.02, y: -0.24}
-  serializedVersion: 2
-  m_Radius: 0.5
 --- !u!114 &3303066431795770406
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -410,7 +374,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34c8ca33e8ac3d74e8978324c2b866ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0.1
+  moveSpeed: 1
   isAttacking: 0
   targetMask:
     serializedVersion: 2
