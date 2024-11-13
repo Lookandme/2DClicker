@@ -1,20 +1,23 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnumyController : MonoBehaviour
+public class EnumyController : MonoBehaviour, IOnDamage
 {
     private Rigidbody2D rb;
     private Animator animator;
+    public float maxHealth = 50f;
+    public float currentHealth;
     public float moveSpeed;
-    private float attackRange = 1f;
-    private float attackRate;
+    private float attackRate = 5f;
     private float lastAttackTime;
-    public bool isAttacking = false;
+    public float damage = 5f;
+   
     public LayerMask targetMask;
     void Start()
     {
-        
+        currentHealth = maxHealth;
     }
 
     void Update()
@@ -24,28 +27,45 @@ public class EnumyController : MonoBehaviour
 
     private void EnumyMove()
     {
-        RaycastHit2D hit2 = Physics2D.Raycast(transform.position,transform.right * -1, attackRange, targetMask);
-        Debug.DrawRay(transform.position, transform.right * -1 * attackRange, Color.red);
-        if (hit2.collider == null)
-        {
-            //animator.SetBool("Walk", true);
-            isAttacking = false;
-            transform.position += Vector3.left * moveSpeed * Time.deltaTime;
+        transform.position += Vector3.left * moveSpeed * Time.deltaTime;
 
-        }
-        else
-        {
-            animator.SetBool("Walk", false);
-
-            isAttacking = true;
-            if (isAttacking && Time.time - lastAttackTime < attackRate)
-            {
-                animator.SetBool("Attack", true);
-                // hit2.collider.GetComponent<IDamagable>().GetDamage(damage); // 몬스터 타격 주는 매서드 인터페이스로 구현 필요
-            }
-        }
 
 
 
     }
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        
+        if (collision.collider.CompareTag("Player"))
+        {
+
+            if (Time.time - lastAttackTime > attackRate)
+            {
+                lastAttackTime = Time.time;
+                collision.collider.GetComponent<IOnDamage>().OnDamage(damage);
+            }
+                
+
+            
+        }
+
+    }
+
+
+
+
+        public void OnDamage(float damage)
+        {
+            currentHealth -= damage;
+            if (currentHealth <= 0)
+            {
+                Die();
+            }
+        }
+
+        private void Die()
+        {
+            Destroy(gameObject);
+        }
+    
 }

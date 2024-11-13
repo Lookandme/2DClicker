@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
-        SpawnEnemyAtPosition(2);
+        SpawnEnemyAtPosition(enemyPrefebs.Count);
     }
     private void Update()
     {

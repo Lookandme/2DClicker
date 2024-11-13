@@ -1,20 +1,29 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerController : MonoBehaviour
+public interface IOnDamage
+{
+    public void OnDamage(float damage);
+}
+public class PlayerController : MonoBehaviour, IOnDamage
 {
     [SerializeField] private Button hitButton;
+    [SerializeField]private UiManager uiManager;
     private Rigidbody2D rb;
     private Animator animator;
-    public Action hit;
+    public Action hitMotion;
+    public Action onDamage;
     public float moveSpeed;
-    private float attackRange = 1f;
+    private float attackRange = 0.5f;
     private float attackRate;
-    private float lastAttackTime;
+    private float lastAttackTime = 0f;
+    private float damage;
     public bool isAttacking = false;
+    public int attackCount = 1;
     public LayerMask targetMask;
 
 
@@ -24,12 +33,13 @@ public class PlayerController : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
         
+        
     }
     private void Start()
     {
         moveSpeed = CharacterStatManager.instance.currentStat.maxSpeed;
         attackRate = CharacterStatManager.instance.currentStat.attackSpeed;
-        
+        damage = CharacterStatManager.instance.currentStat.damage;
     }
     private void FixedUpdate()
     {
@@ -37,14 +47,22 @@ public class PlayerController : MonoBehaviour
     }
     private void OnClick()
     {
-        if(!isAttacking) return;
-        else
+        if(isAttacking)
         {
             animator.SetTrigger("Attack");
-            hit?.Invoke();
+            hitMotion?.Invoke();
+            attackCount += 1;
         }
-        
-        
+        RaycastHit2D hit2 = Physics2D.Raycast(transform.position, transform.right, attackRange, targetMask);
+        if (Time.time - lastAttackTime > attackRate)
+        {
+            isAttacking = true;
+            lastAttackTime = Time.time;
+            hit2.collider.GetComponent<IOnDamage>().OnDamage(damage);
+
+        }
+
+
     }
     private void CharacterMove()
     {
@@ -59,16 +77,30 @@ public class PlayerController : MonoBehaviour
         else
         {
             animator.SetBool("Walk", false);
-            isAttacking = true;
-            if (isAttacking && Time.time - lastAttackTime < attackRate)
-            {
-                lastAttackTime = Time.time;
-                animator.SetBool("Attack", true);
-                // hit2.collider.GetComponent<IDamagable>().GetDamage(damage); // 몬스터 타격 주는 매서드 인터페이스로 구현 필요
-            }
+           
+            
+            
         }
 
 
 
     }
+    public void OnDamage(float damage)
+    {
+        Debug.Log("hit");
+        animator.SetTrigger("GetDamage");
+        onDamage?.Invoke();                 // 나중에 추가 할 동작코드 있다면 구독      
+        uiManager.Health.Decrease(damage);
+        if (uiManager.Health.currentGage <= 0) 
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        animator.SetBool("Die", true);
+    }
+
+
 }
