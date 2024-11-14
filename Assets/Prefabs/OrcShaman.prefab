@@ -376,7 +376,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 50
   currentHealth: 0
-  moveSpeed: 1
+  moveSpeed: 0.1
   damage: 5
   targetMask:
     serializedVersion: 2

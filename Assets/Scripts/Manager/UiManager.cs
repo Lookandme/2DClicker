@@ -1,8 +1,6 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
 
 
 
@@ -10,25 +8,41 @@ public class UiManager : MonoBehaviour
 {
     public static UiManager instance;
     public UiCondition uiCondition;
-   [SerializeField] public TextMeshProUGUI score;
-   
+    [SerializeField] CharacterStatManager characterStatManager;
+    [SerializeField] public TextMeshProUGUI score;
+    [SerializeField] public TextMeshProUGUI hitBtn;
+    [SerializeField] public TextMeshProUGUI autoBtn;
+    [SerializeField] private Button upGradeViewButton; // 업그레이드 창 열기
+    [SerializeField] private Button damageUpButton; // 데미지 업
+    [SerializeField] private Button attackRateDownButton; // 공격 딜레이 감소
+    [SerializeField] private GameObject upgradeUI;
 
-    [SerializeField]private PlayerController controller;
-    public PlayerUI LineClear { get {  return uiCondition.lineClearUI; } }
+
+    [SerializeField] private PlayerController controller;
+    public PlayerUI LineClear { get { return uiCondition.lineClearUI; } }
     public PlayerUI Health { get { return uiCondition.healthUI; } }
-     
+
 
     public float culAddAmount;
     public float culDecreaseAmount;
     public int currentCount;
+    public int coin;
 
 
     private void Awake()
     {
-        instance = this;
-        
+        if (instance == null)
+        {
+            instance = this;
+
+        }
+        else Destroy(gameObject);
+
         LineClear.currentGage = 0f;
         Health.currentGage += Health.maxGage;
+        upGradeViewButton.onClick.AddListener(UpGradeView);
+        damageUpButton.onClick.AddListener(OnClickDamageUp);
+        attackRateDownButton.onClick.AddListener(OnClickAttackRateDown);
 
     }
     private void Start()
@@ -37,18 +51,55 @@ public class UiManager : MonoBehaviour
 
         culAddAmount = CharacterStatManager.instance.currentStat.culAddAmount;
         culDecreaseAmount = CharacterStatManager.instance.currentStat.culDecreaseAmount;
+        
 
-        Health.currentGageTxt.text = "Health Gage";
-        LineClear.currentGageTxt.text = "LineClear Gage";
+
     }
 
-        private void Update()
-        {
-            LineClear.Decrease(culDecreaseAmount);
+    private void Update()
+    {
+        LineClear.Decrease(culDecreaseAmount);
         currentCount = controller.attackCount;
-        score.text = $"Score: {(currentCount) * 100}"; // 점수가 일종의 재화 역할을 겸함
+        BtnTxt();
+
+
+
+    }
+    private void BtnTxt()
+    {
+        Health.currentGageTxt.text = "Health Gage";
+        LineClear.currentGageTxt.text = "LineClear Gage";
+        score.text = $"Current Coin: {currentCount * 100}"; // 점수가 일종의 재화 역할을 겸함
+        if (controller.isAttacking == false)
+        {
+            hitBtn.text = "Wait ...";
+        }
+        else
+        {
+            hitBtn.text = "Hit !";
+        }
+
+    }
+    private void UpGradeView()
+    {
+        if (!upgradeUI.activeSelf)
+        {
+            upgradeUI.SetActive(true);
 
         }
-    
-
+        else
+        {
+            upgradeUI.SetActive(false);
+        }
+    }
+    private void OnClickDamageUp()
+    {
+        characterStatManager.DamageUp(1);
+    }
+    private void OnClickAttackRateDown()
+    {
+        characterStatManager.AttackRateDown(1);
+    }
 }
+
+
