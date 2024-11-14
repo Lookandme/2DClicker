@@ -11,6 +11,7 @@ public class UiManager : MonoBehaviour
     [SerializeField] CharacterStatManager characterStatManager;
     [SerializeField] public TextMeshProUGUI hitBtn;
     [SerializeField] public TextMeshProUGUI autoBtn;
+    [SerializeField] public TextMeshProUGUI count;
     [SerializeField] private Button upGradeViewButton; // 업그레이드 창 열기
     [SerializeField] private Button damageUpButton; // 데미지 업
     [SerializeField] private Button attackRateDownButton; // 공격 딜레이 감소
@@ -70,7 +71,7 @@ public class UiManager : MonoBehaviour
     {
         Health.currentGageTxt.text = "Health Gage";
         LineClear.currentGageTxt.text = "LineClear Gage";
-       
+        count.text = $"Attack Count: {controller.attackCount}";
         if (controller.isAttacking == false)
         {
             hitBtn.text = "Wait ...";
