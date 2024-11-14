@@ -2386,12 +2386,11 @@ MonoBehaviour:
     maxHealth: 100
     maxSpeed: 0.7
     damage: 5
-    attackRate: 0
+    attackRate: 2
     Criticalpercent: 0
     culAddAmount: 5
     culDecreaseAmount: 0.1
-  uiManager: {fileID: 0}
-  buyCount: 0
+  uiManager: {fileID: 169552491}
   price: 100
 --- !u!1 &2559980700052558834
 GameObject:

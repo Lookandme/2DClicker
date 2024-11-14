@@ -7,7 +7,7 @@ public class CharacterStatManager : MonoBehaviour
     public static CharacterStatManager instance; // 매니저 스크립트 싱글톤
     [SerializeField] private Player baseStat; // Player 스크립트에서 정보 받아오기 , 초기 정보
     [SerializeField] private UiManager uiManager;
-    public int buyCount = 1;
+    
     public int price = 100;
     public Player currentStat {  get; private set; } // 현재 정보
     private void Awake()
@@ -35,7 +35,7 @@ public class CharacterStatManager : MonoBehaviour
 
     public void DamageUp(float amount)
     {
-
+        int buyCount = 1;
         price = buyCount * 100;
         MoneyCheck();
         if (MoneyCheck() == true)
@@ -48,7 +48,8 @@ public class CharacterStatManager : MonoBehaviour
     }
     public void AttackRateDown(float amount)
     {
-        price = buyCount * 200;
+        int buyCount = 1;
+        price =  buyCount * 200;
         MoneyCheck();
         if(MoneyCheck() == true)
         {
@@ -61,7 +62,7 @@ public class CharacterStatManager : MonoBehaviour
     }
     private bool MoneyCheck()
     {
-        if (uiManager.coin >= price)
+        if (uiManager.currentCount * 100 >= price)
         {
             return true;
         }

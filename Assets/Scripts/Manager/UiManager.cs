@@ -69,7 +69,7 @@ public class UiManager : MonoBehaviour
     {
         Health.currentGageTxt.text = "Health Gage";
         LineClear.currentGageTxt.text = "LineClear Gage";
-        score.text = $"Current Coin: {currentCount * 100}"; // 점수가 일종의 재화 역할을 겸함
+        score.text = $"Current Coin: {currentCount * 100}"; // 점수가 일종의 재화 역할을 겸함 // 이 부분을 분리해야 할 부분
         if (controller.isAttacking == false)
         {
             hitBtn.text = "Wait ...";
