@@ -9,7 +9,6 @@ public class UiManager : MonoBehaviour
     public static UiManager instance;
     public UiCondition uiCondition;
     [SerializeField] CharacterStatManager characterStatManager;
-    [SerializeField] public TextMeshProUGUI score;
     [SerializeField] public TextMeshProUGUI hitBtn;
     [SerializeField] public TextMeshProUGUI autoBtn;
     [SerializeField] private Button upGradeViewButton; // 업그레이드 창 열기
@@ -25,8 +24,8 @@ public class UiManager : MonoBehaviour
 
     public float culAddAmount;
     public float culDecreaseAmount;
-    public int currentCount;
-    public int coin;
+    
+    
 
 
     private void Awake()
@@ -59,9 +58,9 @@ public class UiManager : MonoBehaviour
 
     private void Update()
     {
-        coin = currentCount *= 100;
+        
         LineClear.Decrease(culDecreaseAmount);
-        currentCount = controller.attackCount;
+       
         BtnTxt();
 
 
@@ -71,7 +70,7 @@ public class UiManager : MonoBehaviour
     {
         Health.currentGageTxt.text = "Health Gage";
         LineClear.currentGageTxt.text = "LineClear Gage";
-        score.text = $"Current Coin: {coin}"; // 점수가 일종의 재화 역할을 겸함 // 이 부분을 분리해야 할 부분
+       
         if (controller.isAttacking == false)
         {
             hitBtn.text = "Wait ...";

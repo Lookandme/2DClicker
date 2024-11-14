@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour, IOnDamage
     [SerializeField] private Button hitButton;
     [SerializeField] private Button autoButton;
     [SerializeField] private UiManager uiManager;
+    [SerializeField] private CoinManager coinManager;
     private Rigidbody2D rb;
     private Animator animator;
     public Action hitMotion;
@@ -57,6 +58,8 @@ public class PlayerController : MonoBehaviour, IOnDamage
             animator.SetBool("Attack", true);
             hitMotion?.Invoke();
             attackCount += 1;
+            coinManager.coin += 100;
+           
 
             RaycastHit2D hit2 = Physics2D.Raycast(transform.position, transform.right, attackRange, targetMask);
             if (Time.time - lastAttackTime > attackRate)

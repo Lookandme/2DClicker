@@ -248,7 +248,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiCondition: {fileID: 958428402}
   characterStatManager: {fileID: 1631649108540834121}
-  score: {fileID: 1907102649}
   hitBtn: {fileID: 1870719482}
   autoBtn: {fileID: 737987615}
   upGradeViewButton: {fileID: 521955766}
@@ -258,8 +257,6 @@ MonoBehaviour:
   controller: {fileID: 6996308509657085885}
   culAddAmount: 0
   culDecreaseAmount: 0
-  currentCount: 0
-  coin: 0
 --- !u!4 &169552492
 Transform:
   m_ObjectHideFlags: 0
@@ -2063,6 +2060,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1870719480}
   m_CullTransparentMesh: 1
+--- !u!1 &1904514122
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1904514124}
+  - component: {fileID: 1904514123}
+  m_Layer: 0
+  m_Name: CoinManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1904514123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1904514122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b8a57619159abf499d8baac0837a1b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  score: {fileID: 1907102649}
+  coin: 0
+--- !u!4 &1904514124
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1904514122}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 368.03546, y: 640.7874, z: -0.25321954}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1907102649 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2168420884908385976, guid: be7548b5dd2635e4b8a07c3979bbe5f9, type: 3}
@@ -2390,7 +2433,7 @@ MonoBehaviour:
     Criticalpercent: 0
     culAddAmount: 5
     culDecreaseAmount: 0.1
-  uiManager: {fileID: 169552491}
+  coinManager: {fileID: 1904514123}
   price: 100
 --- !u!1 &2559980700052558834
 GameObject:
@@ -2789,6 +2832,7 @@ MonoBehaviour:
   hitButton: {fileID: 1868299906}
   autoButton: {fileID: 941181384}
   uiManager: {fileID: 169552491}
+  coinManager: {fileID: 1904514123}
   moveSpeed: 0
   isAttacking: 0
   isCoroutineRunning: 0
@@ -2850,3 +2894,4 @@ SceneRoots:
   - {fileID: 157211184}
   - {fileID: 70309624}
   - {fileID: 169552492}
+  - {fileID: 1904514124}
