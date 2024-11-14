@@ -41,6 +41,8 @@ public class CharacterStatManager : MonoBehaviour
         if (MoneyCheck() == true)
         {
             currentStat.damage += amount;
+            uiManager.coin -= price;
+
             buyCount++;
         }
         else return;
@@ -54,6 +56,7 @@ public class CharacterStatManager : MonoBehaviour
         if(MoneyCheck() == true)
         {
             currentStat.attackRate -= amount;
+            uiManager.coin -= price;
             buyCount++;
         }
         else return;
